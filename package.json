@@ -1,0 +1,19 @@
+{
+  "name": "programmingtask",
+  "version": "1.0.0",
+  "description": "this is programming task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaviInamdar/ProgrammingTask.git"
+  },
+  "author": "ravi inamdar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaviInamdar/ProgrammingTask/issues"
+  },
+  "homepage": "https://github.com/RaviInamdar/ProgrammingTask#readme"
+}
