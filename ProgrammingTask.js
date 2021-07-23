@@ -31,3 +31,32 @@ var apiNameData = retrieveAPI(api_names) || [];
 
 console.log('ageData is', apiAgeData);
 console.log('nameData is', apiNameData);
+
+/*
+  We are going to do 2 things here.
+  - convert all data in api_ages and api_names into their own separate ageData
+  - combine data from both tables into one combination table, where our
+  assumption is that id is a field that exists in EVERY line as this is the key
+
+*/
+
+console.log("destructing age and name data...");
+
+destructAges(apiAgeData);
+destructNames(apiNameData);
+
+function destructAges(api){
+  console.log("ID | AGE")
+  for(let i = 0; i < api.length; i++){
+    console.log(api[i].id, " | " ,api[i].age);
+    console.log(\n);
+  }
+}
+
+function destructNames(api){
+  console.log("ID | FIRST NAME | LAST NAME")
+  for(let i = 0; i < api.length; i++){
+    console.log(api[i].id, " | ", api[i].firstName, " | ", api[i].lastName);
+    console.log(\n);
+  }
+}
