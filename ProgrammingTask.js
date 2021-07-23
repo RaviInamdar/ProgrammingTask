@@ -12,12 +12,10 @@ async function retrieveAPI(url){
 	const response = await fetch(url);
   var data = await response.json();
   console.log('data is', data);
+  return data;
 }
-retrieveAPI(api_ages);
+var apiAgeData = retrieveAPI(api_ages);
+var apiNameData = retrieveAPI(api_names);
 
-// declare name and age data in memory
-// var ageData = retrieveAPI(api_ages);
-// var nameData = retrieveAPI(api_names);
-
-// console.log('ageData is', ageData);
-// console.log('nameData is', nameData);
+console.log('ageData is', apiAgeData);
+console.log('nameData is', apiNameData);
