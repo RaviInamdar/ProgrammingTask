@@ -49,7 +49,7 @@ function destructAges(api){
   console.log("ID | AGE")
   for(let i = 0; i < api.length; i++){
     console.log(api[i].id, " | " ,api[i].age);
-    console.log(\n);
+    console.log("\n");
   }
 }
 
@@ -57,6 +57,6 @@ function destructNames(api){
   console.log("ID | FIRST NAME | LAST NAME")
   for(let i = 0; i < api.length; i++){
     console.log(api[i].id, " | ", api[i].firstName, " | ", api[i].lastName);
-    console.log(\n);
+    console.log("\n");
   }
 }
