@@ -64,7 +64,19 @@ async function main() {
     api2Data.every(({ id: second_id }) =>
     first_id !== second_id));
 
-  const newArr = api2Data.concat(combinedTable).map((v) => v);
+  const newArr = api2Data.concat(combinedTable).map((rowData) => {
+    if(!rowData.firstName || !rowData.lastName || !rowData.age){
+      if(!rowData.firstName){
+        { ...rowData, firstName: "" }
+      } else if (!rowData.lastName){
+        {...rowData, lastName:"" }
+      } else if (!rowData.age){
+        {...rowData, age:""}
+      }
+    } else {
+      rowData;
+    }
+  });
 
   console.log(JSON.stringify(newArr));
 
