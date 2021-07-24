@@ -81,7 +81,7 @@ async function main() {
   const returnArray = api1Data.map(api1Item => {
     api2Data.forEach(api2Item => {
       if(api2Item.id === api1Item.id){
-        {...api1Item, ...api2Item}
+        return {...api1Item, ...api2Item};
       }
     })
   })
