@@ -78,7 +78,22 @@ async function main() {
   //  search for array 1[item].id in object 2
   //    if found, combine the objects
   //    else, loop through api2 keys and add blank elements "". and combine these
-  let returnArray = [];
+  let returnArray = api1Data;
+  console.log('returnarray is', returnArray);
+
+  api2Data.forEach(api2Item => {
+    let found = false;
+    returnArray.forEach(item => {
+      if (api2Item.id === item.id){
+        found = true;
+        item = {...item, ...api2Item};
+      }
+    })
+    if(!found){
+      returnArray.push({...api2Item});
+    }
+  })
+  /*
   api1Data.forEach(api1Item => {
     let found = false;
     api2Data.forEach(api2Item => {
@@ -86,13 +101,13 @@ async function main() {
         found = true;
         returnArray.push({...api2Item, ...api1Item});
       }
+
     })
     if(!found){
       returnArray.push({...api1Item});
     }
-  })
+  })*/
   console.log(returnArray);
-
 }
 main();
 // var apiNames = createTable(api_names);
