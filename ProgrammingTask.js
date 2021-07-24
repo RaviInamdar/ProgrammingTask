@@ -60,17 +60,32 @@ async function main() {
   var combinedKeys = [...new Set (api2Keys.concat(api1Keys))];
   console.log("combined keys are ", combinedKeys);
 
-  const combinedTable = api1Data.filter(({ id: first_id }) =>
-    api2Data.every(({ id: second_id }) =>
-    first_id !== second_id));
+  // const combinedTable = api1Data.filter(({ id: first_id }) =>
+  //   api2Data.every(({ id: second_id }) =>
+  //  first_id !== second_id));
 
-  const newArr = api2Data.concat(combinedTable).map((rowData) => rowData);
+  // const newArr = api2Data.concat(combinedTable).map((rowData) => rowData);
 
-  console.log(JSON.stringify(newArr));
+  // console.log(JSON.stringify(newArr));
 
-  var htmlTable = document.getElementById('taskTable');
-  htmlTable.insertRow(0);
+  // var htmlTable = document.getElementById('taskTable');
+  // htmlTable.insertRow(0);
 
+  // right now i have 2 array of objects, that need to be combinedKeys
+
+  //compare array of object 1 to object 2
+  //for each item in array 1...
+  //  search for array 1[item].id in object 2
+  //    if found, combine the objects
+  //    else, loop through api2 keys and add blank elements "". and combine these
+  const returnArray = api1Data.map(api1Item => {
+    api2Data.forEach(api2Item => {
+      if(api2Item.id === api1Item.id){
+        {...api1Item, ...api2Item}
+      }
+    })
+  })
+  console.log(returnArray);
 
 }
 main();
