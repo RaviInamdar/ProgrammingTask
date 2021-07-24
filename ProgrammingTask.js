@@ -84,7 +84,7 @@ async function main() {
       if(api2Item.id === api1Item.id){
         returnArray.push({...api2Item, ...api1Item});
       } else {
-        returnArray.push({...api2Item});
+        returnArray.push({...api1Item});
       }
     })
   })
