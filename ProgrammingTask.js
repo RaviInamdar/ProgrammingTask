@@ -57,8 +57,9 @@ async function main() {
   console.log(Object.keys(api1Data[0]));
   console.log(Object.keys(api2Data[0]));
 
-  var uniqueKeys = [...new Set(api1Keys.concat(api2Keys))];
-  console.log("unique keys are", uniqueKeys);
+  console.log('combined arrays are ', api1Keys.concat(api2Keys));
+  // var uniqueKeys = [...new Set(api1Keys.concat(api2Keys))];
+  // console.log("unique keys are", uniqueKeys);
 
 
 }
