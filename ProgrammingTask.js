@@ -57,7 +57,13 @@ async function main() {
   console.log(Object.keys(api1Data[0]));
   console.log(Object.keys(api2Data[0]));
 
-  console.log('combined arrays are ', api1Keys.concat(api2Keys));
+  const combinedTable = api1Data.filter(({ id: first_id }) =>
+    api2Data.every(({ id: second_id }) =>
+    first_id !== second_id));
+
+  const newArr = b.concat(r).map((v) => v);
+
+  console.log(JSON.stringify(newArr));
   // var uniqueKeys = [...new Set(api1Keys.concat(api2Keys))];
   // console.log("unique keys are", uniqueKeys);
 
