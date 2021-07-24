@@ -45,14 +45,15 @@ function createTable(url){
 */
 
 // use the retrieveAPI() function to get and save names.
-var apiAgeData = await retrieveAPI(api_ages);
-var apiNameData = await retrieveAPI(api_names);
+async function main() {
+  var apiAgeData = await retrieveAPI(api_ages);
+  var apiNameData = await retrieveAPI(api_names);
+  console.log('name data is ', apiNameData);
+  console.log('ages data is ', apiAgeData);
 
+}
 // var apiNames = createTable(api_names);
 // var apiAges = createTable(api_ages);
 
 // console.log('ageData is', apiAgeData);
 // console.log('nameData is', apiNameData);
-
-console.log('name data is ', apiNameData);
-console.log('ages data is ', apiAgeData);
