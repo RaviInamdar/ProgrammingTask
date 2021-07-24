@@ -52,11 +52,13 @@ async function main() {
   console.log('api 2 data is ', api2Data);
 
   // retrieve keys
-  var api1Keys = api1Data[0];
-  var api2Keys = api2Data[0];
+  var api1Keys = Object.keys(api1Data[0]);
+  var api2Keys = Object.keys(api2Data[0]);
   console.log(Object.keys(api1Data[0]));
   console.log(Object.keys(api2Data[0]));
 
+  var combinedKeys = [...new Set (api1Keys.concat(api2Keys))];
+  console.log("combined keys are ", console.log(Object.keys(combinedKeys)));
 
   const combinedTable = api1Data.filter(({ id: first_id }) =>
     api2Data.every(({ id: second_id }) =>
