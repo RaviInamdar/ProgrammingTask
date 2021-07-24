@@ -58,7 +58,7 @@ async function main() {
   console.log(Object.keys(api2Data[0]));
 
   var combinedKeys = [...new Set (api1Keys.concat(api2Keys))];
-  console.log("combined keys are ", Object.keys(combinedKeys));
+  console.log("combined keys are ", combinedKeys);
 
   const combinedTable = api1Data.filter(({ id: first_id }) =>
     api2Data.every(({ id: second_id }) =>
