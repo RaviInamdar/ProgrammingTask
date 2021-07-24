@@ -32,18 +32,31 @@ function createTable(url){
   .then(res => res.json())
   .then(data => {
     console.log("data is ", data);
+    for(let i = 0; i < data.length; i++){
+      console.log(data[i]);
+      console.log(Object.keys(data));
+    }
+    return data;
+    //fire everything here, create functions to pass in / return
   })
 }
-
-console.log("api ages");
-createTable(api_ages);
-
-console.log("api names");
-createTable(api_names);
 
 // use the retrieveAPI() function to get and save names.
 // var apiAgeData = retrieveAPI(api_ages);
 // var apiNameData = retrieveAPI(api_names);
 
+var apiNames = createTable(api_names);
+var apiAges = createTable(api_ages);
+
 // console.log('ageData is', apiAgeData);
 // console.log('nameData is', apiNameData);
+
+console.log('name data is ', apiNames);
+console.log('ages data is ', apiAges);
+
+console.log('name keys is ', dataKeys(apiNames));
+console.log('ages keys is ', dataKeys(apiAges));
+
+function dataKeys(data){
+  return Object.keys(data);
+}
