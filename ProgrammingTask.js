@@ -52,6 +52,7 @@ async function main() {
   console.log('ages data is ', apiAgeData);
 
 }
+main();
 // var apiNames = createTable(api_names);
 // var apiAges = createTable(api_ages);
 
