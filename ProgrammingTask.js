@@ -61,7 +61,7 @@ async function main() {
     api2Data.every(({ id: second_id }) =>
     first_id !== second_id));
 
-  const newArr = b.concat(r).map((v) => v);
+  const newArr = api2Data.concat(combinedTable).map((v) => v);
 
   console.log(JSON.stringify(newArr));
   // var uniqueKeys = [...new Set(api1Keys.concat(api2Keys))];
