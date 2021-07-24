@@ -4,7 +4,7 @@
   to them later. W store these variables as constants because during the
   execution of the program, we do not expect the URLs to change.
 */
-const api_a1 =
+const api_1 =
       'http://5c37c33f7820ff0014d927c5.mockapi.io/msr/ages';
 
 const api_2 =
