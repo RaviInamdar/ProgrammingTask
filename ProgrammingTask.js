@@ -34,7 +34,8 @@ function createTable(url){
     console.log("data is ", data);
     for(let i = 0; i < data.length; i++){
       console.log(data[i]);
-      console.log(Object.keys(data));
+      console.log(Object.keys(data[i]));
+
     }
     return data;
     //fire everything here, create functions to pass in / return
@@ -53,10 +54,3 @@ var apiAges = createTable(api_ages);
 
 console.log('name data is ', apiNames);
 console.log('ages data is ', apiAges);
-
-console.log('name keys is ', dataKeys(apiNames));
-console.log('ages keys is ', dataKeys(apiAges));
-
-function dataKeys(data){
-  return Object.keys(data);
-}
