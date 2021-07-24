@@ -65,10 +65,8 @@ async function main() {
     first_id !== second_id));
 
   const newArr = api2Data.concat(combinedTable).map((rowData) => {
-
       console.log('rowdata keys', Object.keys(rowData));
       rowData;
-    })
   });
 
   console.log(JSON.stringify(newArr));
