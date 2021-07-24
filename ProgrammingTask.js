@@ -87,6 +87,7 @@ async function main() {
         found = true;
         found2 = true;
         returnArray.push({...api2Item, ...api1Item});
+      }
       if(!found2){
         returnArray.push({...api2Item});
       }
@@ -94,7 +95,6 @@ async function main() {
     if(!found){
       returnArray.push({...api1Item});
     }
-
   })
   console.log(returnArray);
 
