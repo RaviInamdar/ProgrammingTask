@@ -15,7 +15,7 @@ const api_names =
   fetch(), a (relatively) new JS way of retrieving files. We will use this
   function to call both api's.
 */
-/*
+
 async function retrieveAPI(url){
   // retrieves response from the URl using fetch()
 	const response = await fetch(url);
@@ -25,8 +25,9 @@ async function retrieveAPI(url){
   // we want to return this data as we want to save it outside of this fxn
   return data;
 }
-*/
 
+
+/*
 function createTable(url){
   fetch(url)
   .then(res => res.json())
@@ -37,20 +38,21 @@ function createTable(url){
       console.log(Object.keys(data[i]));
 
     }
-    return data;
+    objectData = data;
     //fire everything here, create functions to pass in / return
   })
 }
+*/
 
 // use the retrieveAPI() function to get and save names.
-// var apiAgeData = retrieveAPI(api_ages);
-// var apiNameData = retrieveAPI(api_names);
+var apiAgeData = await retrieveAPI(api_ages);
+var apiNameData = await retrieveAPI(api_names);
 
-var apiNames = createTable(api_names);
-var apiAges = createTable(api_ages);
+// var apiNames = createTable(api_names);
+// var apiAges = createTable(api_ages);
 
 // console.log('ageData is', apiAgeData);
 // console.log('nameData is', apiNameData);
 
-console.log('name data is ', apiNames);
-console.log('ages data is ', apiAges);
+console.log('name data is ', apiNameData);
+console.log('ages data is ', apiAgeData);
