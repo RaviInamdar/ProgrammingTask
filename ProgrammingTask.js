@@ -85,7 +85,8 @@ async function main() {
       if(api2Item.id === api1Item.id){
         found = true;
         returnArray.push({...api2Item, ...api1Item});
-      } else if(!returnArray.includes(api2Item)){
+      }
+      if(!found && !returnArray.includes(api2Item)){
         returnArray.push({...api2Item});
       }
     })
