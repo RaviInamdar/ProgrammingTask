@@ -80,13 +80,16 @@ async function main() {
   //    else, loop through api2 keys and add blank elements "". and combine these
   let returnArray = [];
   api1Data.forEach(api1Item => {
+    let found = false;
     api2Data.forEach(api2Item => {
       if(api2Item.id === api1Item.id){
+        found = true;
         returnArray.push({...api2Item, ...api1Item});
-      } else {
-        returnArray.push({...api1Item});
-      }
     })
+    if(!found){
+      returnArray.push({...api1Item});
+    }
+
   })
   console.log(returnArray);
 
