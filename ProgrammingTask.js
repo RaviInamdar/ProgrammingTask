@@ -82,11 +82,12 @@ async function main() {
   api1Data.forEach(api1Item => {
     let found = false;
     api2Data.forEach(api2Item => {
+      let found2 = false;
       if(api2Item.id === api1Item.id){
         found = true;
+        found2 = true;
         returnArray.push({...api2Item, ...api1Item});
-      }
-      if(!found){
+      if(!found2){
         returnArray.push({...api2Item});
       }
     })
