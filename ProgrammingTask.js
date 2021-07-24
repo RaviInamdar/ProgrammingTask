@@ -4,10 +4,10 @@
   to them later. W store these variables as constants because during the
   execution of the program, we do not expect the URLs to change.
 */
-const api_ages =
+const api_a1 =
       'http://5c37c33f7820ff0014d927c5.mockapi.io/msr/ages';
 
-const api_names =
+const api_2 =
       'http://5c37c33f7820ff0014d927c5.mockapi.io/msr/names';
 
 /*
@@ -46,10 +46,20 @@ function createTable(url){
 
 // use the retrieveAPI() function to get and save names.
 async function main() {
-  var apiAgeData = await retrieveAPI(api_ages);
-  var apiNameData = await retrieveAPI(api_names);
-  console.log('name data is ', apiNameData);
-  console.log('ages data is ', apiAgeData);
+  var api1Data = await retrieveAPI(api_1);
+  var api2Data = await retrieveAPI(api_2);
+  console.log('api 1 data is ', api1Data);
+  console.log('api 2 data is ', api2Data);
+
+  // retrieve keys
+  var api1Keys = api1Data[0];
+  var api2Keys = api2Data[0];
+  console.log(Object.keys(api1Data[0]));
+  console.log(Object.keys(api2Data[0]));
+
+  var uniqueKeys = [...new Set(array1.concat(array2))];
+  console.log("unique keys are", uniqueKeys);
+
 
 }
 main();
