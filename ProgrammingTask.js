@@ -78,10 +78,11 @@ async function main() {
   //  search for array 1[item].id in object 2
   //    if found, combine the objects
   //    else, loop through api2 keys and add blank elements "". and combine these
-  const returnArray = api1Data.map(api1Item => {
+  let returnArray;
+  api1Data.forEach(api1Item => {
     api2Data.forEach(api2Item => {
       if(api2Item.id === api1Item.id){
-        return {...api1Item, ...api2Item};
+        returnArray.push({...api1Item, ...api2Item});
       }
     })
   })
