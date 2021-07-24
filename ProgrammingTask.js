@@ -86,7 +86,7 @@ async function main() {
     returnArray.forEach(item => {
       if (api2Item.id === item.id){
         found = true;
-        item = {...item, ...api2Item};
+        returnArray.push({...item, ...api2Item});
       }
     })
     if(!found){
