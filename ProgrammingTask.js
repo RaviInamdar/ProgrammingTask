@@ -66,7 +66,7 @@ async function main() {
 
   const newArr = api2Data.concat(combinedTable).map((rowData) => {
       console.log('rowdata keys', Object.keys(rowData));
-      rowData;
+      return rowData;
   });
 
   console.log(JSON.stringify(newArr));
