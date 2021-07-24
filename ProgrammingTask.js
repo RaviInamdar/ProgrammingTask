@@ -68,7 +68,7 @@ async function main() {
 
       console.log('rowdata keys', Object.keys(rowData));
       rowData;
-    }
+    })
   });
 
   console.log(JSON.stringify(newArr));
