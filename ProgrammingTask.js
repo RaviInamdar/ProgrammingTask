@@ -65,15 +65,8 @@ async function main() {
     first_id !== second_id));
 
   const newArr = api2Data.concat(combinedTable).map((rowData) => {
-    if(!rowData.firstName || !rowData.lastName || !rowData.age){
-      if(!rowData.firstName){
-        { firstName: "", ...rowData };
-      } else if (!rowData.lastName){
-        {...rowData, lastName:"" };
-      } else if (!rowData.age){
-        {...rowData, age:""};
-      }
-    } else {
+
+      console.log('rowdata keys', Object.keys(rowData));
       rowData;
     }
   });
