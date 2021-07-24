@@ -67,7 +67,7 @@ async function main() {
   const newArr = api2Data.concat(combinedTable).map((rowData) => {
     if(!rowData.firstName || !rowData.lastName || !rowData.age){
       if(!rowData.firstName){
-        { ...rowData, firstName: "" };
+        { firstName: "", ...rowData };
       } else if (!rowData.lastName){
         {...rowData, lastName:"" };
       } else if (!rowData.age){
