@@ -49,6 +49,14 @@ function findMissingKeys(obj, combinedKeys){
   let foundKeys = combinedKeys.filter(function(obj) {
     return objKeys.indexOf(obj) == -1; });
   console.log('the missing keys are', foundKeys);
+
+  let returnObject = {};
+  foundKeys.forEach(key){
+    obj.key = "";
+  }
+  console.log('return object is', returnObject);
+
+  return returnObject;
 }
 
 /*
@@ -127,7 +135,7 @@ async function main() {
       if(!found2){
         console.log('remaining array item: ', returnArray[i]);
         missingKeys = findMissingKeys(returnArray[i], combinedKeys);
-        returnArray2.push({...returnArray[i], });
+        returnArray2.push({...returnArray[i], ...missingKeys });
       }
     }
   }
