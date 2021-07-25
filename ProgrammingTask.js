@@ -117,46 +117,7 @@ function findMissingKeys(obj, combinedKeys){
   return returnObject;
 }
 
-/*
-  The main() function will perform all the steps needed for the table to show.
-  This will call on all the functions needed, and sits behind an async
-  declaration as this helps us see the Promise data.
-*/
-async function main() {
-  // retrieve API data
-  var api1Data = await retrieveAPI(api_1);
-  var api2Data = await retrieveAPI(api_2);
-
-  // retrieve the keys from each source. these will be our headers
-  var api1Keys = Object.keys(api1Data[0]);
-  var api2Keys = Object.keys(api2Data[0]);
-  var combinedKeys = [...new Set (api2Keys.concat(api1Keys))];
-
-  // create the consolidated array of objects
-  var unsortedReturnArray = mergeArrayObjects(api1Data, api2Data, combinedKeys);
-
-  // one more thing before we pass to table, let's alphabetize our keys so they
-  // look in uniform order as we grab them into html table
-  var sortedKeys = combinedKeys.sort();
-
-  // var sortedReturnArray = [];
-  var sortedReturnArray = sortReturnArray(unsortedReturnArray);
-
-  /*
-  unsortedReturnArray.forEach(item => {
-    const ordered = Object.keys(item).sort().reduce(
-      (obj, key) => {
-        obj[key] = item[key];
-        return obj;
-      },
-      {}
-    );
-    sortedReturnArray.push({...ordered});
-  });
-
-  console.log('sorted return array is', sortedReturnArray);
-  */
-
+function insertTableAndData(sortedKeys, sortedReturnArray){
   var htmlTable = document.getElementById('taskTable');
   let table = document.createElement('table');
   let headerRow = document.createElement('tr');
@@ -183,22 +144,62 @@ async function main() {
   })
 
   htmlTable.appendChild(table);
+}
+
+/*
+  The main() function will perform all the steps needed for the table to show.
+  This will call on all the functions needed, and sits behind an async
+  declaration as this helps us see the Promise data.
+*/
+async function main() {
+  // retrieve API data
+  var api1Data = await retrieveAPI(api_1);
+  var api2Data = await retrieveAPI(api_2);
+
+  // retrieve the keys from each source. these will be our headers
+  var api1Keys = Object.keys(api1Data[0]);
+  var api2Keys = Object.keys(api2Data[0]);
+  var combinedKeys = [...new Set (api2Keys.concat(api1Keys))];
+
+  // create the consolidated array of objects
+  var unsortedReturnArray = mergeArrayObjects(api1Data, api2Data, combinedKeys);
+
+  // one more thing before we pass to table, let's alphabetize our keys so they
+  // look in uniform order as we grab them into html table
+  var sortedKeys = combinedKeys.sort();
+
+  var sortedReturnArray = sortReturnArray(unsortedReturnArray);
+
+  // now, add the table items and headers to our html
+  insertTableAndData(sortedKeys, sortedReturnArray);
 
   /*
-  api1Data.forEach(api1Item => {
-    let found = false;
-    api2Data.forEach(api2Item => {
-      if(api2Item.id === api1Item.id){
-        found = true;
-        returnArray.push({...api2Item, ...api1Item});
-      }
+  var htmlTable = document.getElementById('taskTable');
+  let table = document.createElement('table');
+  let headerRow = document.createElement('tr');
 
+  sortedKeys.forEach(headerText => {
+    let header = document.createElement('th');
+    let textNode = document.createTextNode(headerText);
+    header.appendChild(textNode);
+    headerRow.appendChild(header);
+  });
+
+  table.appendChild(headerRow);
+
+  sortedReturnArray.forEach(item => {
+    let row = document.createElement('tr');
+
+    Object.values(item).forEach(text => {
+      let cell = document.createElement('td');
+      let textNode = document.createTextNode(text);
+      cell.appendChild(textNode);
+      row.appendChild(cell);
     })
-    if(!found){
-      returnArray.push({...api1Item});
-    }
-  })*/
-  console.log(returnArray);
-  console.log(unsortedReturnArray);
+    table.appendChild(row);
+  })
+
+  htmlTable.appendChild(table);
+*/
 }
 main();
