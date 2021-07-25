@@ -106,6 +106,9 @@ async function main() {
       }
     }
     if(!found){
+      console.log('no match found for ' returnArray[i]);
+      console.log('returnArray looks like', returnArray);
+      console.log('returnArray2 looks like', returnArray2);
       let found2 = false;
       for(let a = 0; a < returnArray2.length; a++ ){
         if(returnArray2[a].id === returnArray[i].id){
