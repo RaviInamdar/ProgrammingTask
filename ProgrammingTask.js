@@ -132,7 +132,7 @@ async function main() {
 
   table.appendChild(headerRow);
 
-  returnArray2.foreach(item => {
+  returnArray2.forEach(item => {
     let row = document.createElement('tr');
 
     Object.values(item).forEach(text => {
