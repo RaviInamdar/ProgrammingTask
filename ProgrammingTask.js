@@ -132,6 +132,7 @@ async function main() {
     }
   })*/
   console.log(returnArray);
+  console.log(returnArray2);
 }
 main();
 
