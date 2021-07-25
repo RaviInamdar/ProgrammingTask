@@ -112,6 +112,7 @@ async function main() {
       for(let j = i+1; j < returnArray.length; j++){
         if(returnArray[i].id === returnArray[j].id){
           found = true;
+          console.log('return arrays ', returnArray[i], returnArray[j]);
           returnArray2.push({...returnArray[j], ...returnArray[i]});
         }
       }
