@@ -51,9 +51,9 @@ function findMissingKeys(obj, combinedKeys){
   console.log('the missing keys are', foundKeys);
 
   let returnObject = {};
-  foundKeys.forEach(key){
+  foundKeys.forEach(key => {
     obj.key = "";
-  }
+  })
   console.log('return object is', returnObject);
 
   return returnObject;
