@@ -82,6 +82,21 @@ function mergeArrayObjects(api1Data, api2Data, combinedKeys){
   return returnArray;
 }
 
+function sortReturnArray(unsortedReturnArray){
+  var sortedReturnArray = [];
+  unsortedReturnArray.forEach(item => {
+    const ordered = Object.keys(item).sort().reduce(
+      (obj, key) => {
+        obj[key] = item[key];
+        return obj;
+      },
+      {}
+    );
+    sortedReturnArray.push({...ordered});
+  });
+  return sortedReturnArray;
+}
+
 /*
   The function below takes in a single object (a user row) and the list of
   all keys that exist in the table. A comparison is done to see which keys
@@ -120,49 +135,15 @@ async function main() {
 
   // create the consolidated array of objects
   var unsortedReturnArray = mergeArrayObjects(api1Data, api2Data, combinedKeys);
-  /*
-  // combine all of the data into one consolidated array of objects.
-  // this array of objects will have duplicate data, so we'll need to
-  // take some steps to remove the duplicates
-  let returnArray = [...api1Data, ...api2Data];
-  let returnArray2 = [];
-
-  for(let i = 0; i < returnArray.length; i++){
-    let found = false;
-    if(i+1 <= returnArray.length){
-      for(let j = i+1; j < returnArray.length; j++){
-        if(returnArray[i].id === returnArray[j].id){
-          found = true;
-          console.log('return arrays ', returnArray[i], returnArray[j]);
-          returnArray2.push({...returnArray[j], ...returnArray[i]});
-        }
-      }
-    }
-    if(!found){
-      let found2 = false;
-      for(let a = 0; a < returnArray2.length; a++ ){
-        if(returnArray2[a].id === returnArray[i].id){
-          found2 = true;
-        }
-      }
-      // to the arrays where the pairs weren't found, we need to add them
-      // with standard mising data keys/values as "".
-      if(!found2){
-        console.log('remaining array item: ', returnArray[i]);
-        missingKeys = findMissingKeys(returnArray[i], combinedKeys);
-        returnArray2.push({...returnArray[i], ...missingKeys });
-      }
-    }
-  }
-  */
-
 
   // one more thing before we pass to table, let's alphabetize our keys so they
   // look in uniform order as we grab them into html table
   var sortedKeys = combinedKeys.sort();
 
-  var sortedReturnArray = [];
+  // var sortedReturnArray = [];
+  var sortedReturnArray = sortReturnArray(unsortedReturnArray);
 
+  /*
   unsortedReturnArray.forEach(item => {
     const ordered = Object.keys(item).sort().reduce(
       (obj, key) => {
@@ -175,6 +156,7 @@ async function main() {
   });
 
   console.log('sorted return array is', sortedReturnArray);
+  */
 
   var htmlTable = document.getElementById('taskTable');
   let table = document.createElement('table');
@@ -221,9 +203,3 @@ async function main() {
   console.log(unsortedReturnArray);
 }
 main();
-
-// var apiNames = createTable(api_names);
-// var apiAges = createTable(api_ages);
-
-// console.log('ageData is', apiAgeData);
-// console.log('nameData is', apiNameData);
