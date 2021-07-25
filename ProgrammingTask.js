@@ -26,6 +26,7 @@ async function retrieveAPI(url){
   return data;
 }
 
+
 function mergeArrayObjects(arr1,arr2){
   let start = 0;
   let merge = [];
@@ -39,6 +40,15 @@ function mergeArrayObjects(arr1,arr2){
     start = start+1
   }
   return merge;
+}
+
+function findMissingKeys(obj, combinedKeys){
+  // returns array of keys
+  objKeys = Object.keys(obj);
+
+  let foundKeys = combinedKeys.filter(function(obj) {
+    return objKeys.indexOf(obj) == -1; });
+  console.log('the missing keys are', foundKeys);
 }
 
 /*
@@ -114,7 +124,9 @@ async function main() {
         }
       }
       if(!found2){
-        returnArray2.push({...returnArray[i]});
+        console.log('remaining array item: ', returnArray[i]);
+        missingKeys = findMissingKeys(returnArray[i], combinedKeys);
+        returnArray2.push({...returnArray[i], });
       }
     }
   }
