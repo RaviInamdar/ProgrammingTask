@@ -1,0 +1,22 @@
+{
+  "name": "programmingtask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ProgrammingTask.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaviInamdar/ProgrammingTask.git"
+  },
+  "author": "Ravi Inamdar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaviInamdar/ProgrammingTask/issues"
+  },
+  "homepage": "https://github.com/RaviInamdar/ProgrammingTask#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}

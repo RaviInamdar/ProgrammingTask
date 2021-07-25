@@ -188,3 +188,6 @@ async function main() {
   insertTableAndData(sortedKeys, sortedReturnArray);
 }
 main();
+
+// this should allow the functions to be exported as test
+module.exports = { retrieveAPI, mergeArrayObjects, sortReturnArray, findMissingKeys };

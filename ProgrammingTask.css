@@ -9,7 +9,10 @@ th {
   color: white;
 }
 #taskTable {
-  float: center;
   margin: 50px;
   padding: 50px;
+}
+
+table {
+  width: 50%;
 }
