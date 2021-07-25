@@ -92,6 +92,7 @@ async function main() {
   //  search for array 1[item].id in object 2
   //    if found, combine the objects
   //    else, loop through api2 keys and add blank elements "". and combine these
+
   let returnArray = [...api1Data, ...api2Data];
   let returnArray2 = [];
 
@@ -101,14 +102,11 @@ async function main() {
       for(let j = i+1; j < returnArray.length; j++){
         if(returnArray[i].id === returnArray[j].id){
           found = true;
-          returnArray2.push({...returnArray[i], ...returnArray[j]});
+          returnArray2.push({...returnArray[j], ...returnArray[i]});
         }
       }
     }
     if(!found){
-      console.log('no match found for ', returnArray[i]);
-      console.log('returnArray looks like', returnArray);
-      console.log('returnArray2 looks like', returnArray2);
       let found2 = false;
       for(let a = 0; a < returnArray2.length; a++ ){
         if(returnArray2[a].id === returnArray[i].id){
@@ -120,6 +118,34 @@ async function main() {
       }
     }
   }
+
+  var htmlTable = document.getElementById('taskTable');
+  let table = document.createElement('table');
+  let headerRow = document.createElement('tr');
+
+  combinedKeys.forEach(headerText => {
+    let header = document.createElement('th');
+    let textNode = document.createTextNode(headerText);
+    header.appendChild(textNode);
+    headerRow.appendChild(header);
+  });
+
+  table.appendChild(headerRow);
+
+  returnArray2.foreach(item => {
+    let row = document.createElement('tr');
+
+    Object.values(item).forEach(text => {
+      let cell = document.createElement('td');
+      let textNode = document.createTextNode(text);
+      cell.appendChild(textNode);
+      row.appendChild(cell);
+    })
+    table.appendChild(row);
+  })
+
+  myTable.appendChild(table);
+
   /*
   api1Data.forEach(api1Item => {
     let found = false;
