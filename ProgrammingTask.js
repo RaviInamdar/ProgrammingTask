@@ -111,10 +111,9 @@ function findMissingKeys(obj, combinedKeys){
   let foundKeys = combinedKeys.filter(function(obj) {
     return objKeys.indexOf(obj) == -1; });
 
-    // let returnObject = {};
-    returnObject[item] = " ";
-  })
-
+    foundKeys.forEach(item => {
+      returnObject[item] = " ";
+    })
   return returnObject;
 }
 
