@@ -93,24 +93,6 @@ async function main() {
   var combinedKeys = [...new Set (api2Keys.concat(api1Keys))];
   console.log("combined keys are ", combinedKeys);
 
-  // const combinedTable = api1Data.filter(({ id: first_id }) =>
-  //   api2Data.every(({ id: second_id }) =>
-  //  first_id !== second_id));
-
-  // const newArr = api2Data.concat(combinedTable).map((rowData) => rowData);
-
-  // console.log(JSON.stringify(newArr));
-
-  // var htmlTable = document.getElementById('taskTable');
-  // htmlTable.insertRow(0);
-
-  // right now i have 2 array of objects, that need to be combinedKeys
-
-  //compare array of object 1 to object 2
-  //for each item in array 1...
-  //  search for array 1[item].id in object 2
-  //    if found, combine the objects
-  //    else, loop through api2 keys and add blank elements "". and combine these
 
   let returnArray = [...api1Data, ...api2Data];
   let returnArray2 = [];
@@ -133,6 +115,7 @@ async function main() {
           found2 = true;
         }
       }
+      // its happening right, now we need to find a way to keep order
       if(!found2){
         console.log('remaining array item: ', returnArray[i]);
         missingKeys = findMissingKeys(returnArray[i], combinedKeys);
@@ -140,6 +123,26 @@ async function main() {
       }
     }
   }
+
+  // one more thing before we pass to table, let's alphabetize our keys so they
+  // look in uniform order as we grab them into html table
+  var sortedKeys = combinedKeys.sort();
+  console.log('sorted keys are ', sortedKeys);
+
+  var sortedReturnArray = [];
+
+  returnArray2.forEach(item => {
+    const ordered = Object.keys(item).sort().reduce(
+      (obj, key) => {
+        obj[key] = unordered[key];
+        return obj;
+      },
+      {}
+    );
+    sortedReturnArray.push({...ordered});
+  });
+
+  console.log('sorted return array is', sortedReturnArray);
 
   var htmlTable = document.getElementById('taskTable');
   let table = document.createElement('table');
