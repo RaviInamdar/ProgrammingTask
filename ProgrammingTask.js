@@ -104,11 +104,11 @@ async function main() {
           returnArray2.push({...returnArray[i], ...returnArray[j]});
         }
       }
-  }
+    }
     if(!found){
       let found2 = false;
       for(let a = 0; a < returnArray2.length; a++ ){
-        if(returnArray2.id === returnArray[i].id){
+        if(returnArray2[a].id === returnArray[i].id){
           found2 = true;
         }
       }
