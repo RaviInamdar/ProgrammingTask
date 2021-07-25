@@ -93,6 +93,30 @@ async function main() {
   //    if found, combine the objects
   //    else, loop through api2 keys and add blank elements "". and combine these
   let returnArray = [...api1Data, ...api2Data];
+  let returnArray2 = [];
+
+  for(let i = 0; i < returnArray.length; i++){
+    let found = false;
+    if(i+1 <= array.length){
+      for(let j = i+1; j < returnArray.length; j++){
+        found = true;
+        if(returnArray[i].id === returnArray[j].id){
+          returnArray2.push({...returnArray[i], ...returnArray[j]});
+        }
+      }
+  }
+    if(!found){
+      let found2 = false;
+      for(let a = 0; a < returnArray2.length; a++ ){
+        if(returnArray2.id === returnArray[i].id){
+          found2 = true;
+        }
+      }
+      if(!found2){
+        returnArray2.push({...returnArray[i]});
+      }
+    }
+  }
   /*
   api1Data.forEach(api1Item => {
     let found = false;
