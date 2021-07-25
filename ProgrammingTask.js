@@ -99,8 +99,8 @@ async function main() {
     let found = false;
     if(i+1 <= returnArray.length){
       for(let j = i+1; j < returnArray.length; j++){
-        found = true;
         if(returnArray[i].id === returnArray[j].id){
+          found = true;
           returnArray2.push({...returnArray[i], ...returnArray[j]});
         }
       }
