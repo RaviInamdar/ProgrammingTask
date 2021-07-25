@@ -144,7 +144,7 @@ async function main() {
     table.appendChild(row);
   })
 
-  myTable.appendChild(table);
+  htmlTable.appendChild(table);
 
   /*
   api1Data.forEach(api1Item => {
