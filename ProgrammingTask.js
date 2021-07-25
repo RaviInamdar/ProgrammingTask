@@ -97,7 +97,7 @@ async function main() {
 
   for(let i = 0; i < returnArray.length; i++){
     let found = false;
-    if(i+1 <= array.length){
+    if(i+1 <= returnArray.length){
       for(let j = i+1; j < returnArray.length; j++){
         found = true;
         if(returnArray[i].id === returnArray[j].id){
