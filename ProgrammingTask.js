@@ -92,7 +92,7 @@ async function main() {
   //  search for array 1[item].id in object 2
   //    if found, combine the objects
   //    else, loop through api2 keys and add blank elements "". and combine these
-  let returnArray = mergeArrayObjects(api1Data, api2Data);
+  let returnArray = [...api1Data, ...api2Data];
   /*
   api1Data.forEach(api1Item => {
     let found = false;
