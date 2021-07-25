@@ -26,74 +26,104 @@ async function retrieveAPI(url){
   return data;
 }
 
+/*
+ This function willl combine all of the data into one consolidated array of
+ objects. This resulting array of objects will have duplicate data,
+ so we'll take steps to remove the duplicates, and return the consolidated
+ data from the two API's.
+*/
+function mergeArrayObjects(api1Data, api2Data, combinedKeys){
+  // first, consolidate the data which will have duplicates
+  let consolidatedArray = [...api1Data, ...api2Data];
+  // initialize array that will not have duplicates
+  let returnArray = [];
 
-function mergeArrayObjects(arr1,arr2){
-  let start = 0;
-  let merge = [];
-
-  while(start < arr1.length){
-    if(arr1[start].id === arr2[start].id){
-         //pushing the merged objects into array
-        merge.push({...arr1[start],...arr2[start]})
+  // loop through our consolidated array...
+  for(let i = 0; i < consolidatedArray.length; i++){
+    let found = false;
+    if(i+1 <= consolidatedArray.length){
+      // ...and do a check-ahead to see which IDs match.
+      // this is the tactic I used to make sure we don't
+      // 're-cross' any objects. once an object is dealt
+      // with, we move past.
+      for(let j = i+1; j < consolidatedArray.length; j++){
+        // once a match is found, push to our new array.
+        // since these are keys, we assume that there is
+        // only 1 id listed per array of objects. this means
+        // in our case, there will only ever be up to 2 of the same IDs found
+        // total. in the case of traversing, this means a match will only be
+        // found once.
+        if(consolidatedArray[i].id === consolidatedArray[j].id){
+          found = true;
+          returnArray.push({...consolidatedArray[j], ...consolidatedArray[i]});
+        }
+      }
     }
-    //incrementing start value
-    start = start+1
+    if(!found){
+      // at this point, we're dealing with an object that hasn't found a duplicate.
+      let existsInNewArray = false;
+      // we run through the list of non-duplicated array of objects and make
+      // sure it doesn't exist. if it does exist (by comparing IDs), we flip
+      // the flag to true...
+      for(let a = 0; a < returnArray.length; a++ ){
+        if(returnArray[a].id === consolidatedArray[i].id){
+          existsInNewArray = true;
+        }
+      }
+      // ...and we use that flag here.
+      // to the arrays where the pairs weren't found, we need to add them
+      // to our consolidated array
+      if(!existsInNewArray){
+        missingKeys = findMissingKeys(consolidatedArray[i], combinedKeys);
+        returnArray.push({...consolidatedArray[i], ...missingKeys });
+      }
+    }
   }
-  return merge;
+  return returnArray;
 }
 
+/*
+  The function below takes in a single object (a user row) and the list of
+  all keys that exist in the table. A comparison is done to see which keys
+  are missing, and the missing keys will be added with blank data
+*/
 function findMissingKeys(obj, combinedKeys){
   // returns array of keys
   objKeys = Object.keys(obj);
 
+  let returnObject = {};
+  // get back the keys we need to give back, and add them to the return object
   let foundKeys = combinedKeys.filter(function(obj) {
     return objKeys.indexOf(obj) == -1; });
-  console.log('the missing keys are', foundKeys);
 
-  let returnObject = {};
-  foundKeys.forEach(item => {
-    console.log('item is', item);
+    // let returnObject = {};
     returnObject[item] = " ";
   })
-  console.log('return object is', returnObject);
 
   return returnObject;
 }
 
 /*
-function createTable(url){
-  fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    console.log("data is ", data);
-    for(let i = 0; i < data.length; i++){
-      console.log(data[i]);
-      console.log(Object.keys(data[i]));
-
-    }
-    objectData = data;
-    //fire everything here, create functions to pass in / return
-  })
-}
+  The main() function will perform all the steps needed for the table to show.
+  This will call on all the functions needed, and sits behind an async
+  declaration as this helps us see the Promise data.
 */
-
-// use the retrieveAPI() function to get and save names.
 async function main() {
+  // retrieve API data
   var api1Data = await retrieveAPI(api_1);
   var api2Data = await retrieveAPI(api_2);
-  console.log('api 1 data is ', api1Data);
-  console.log('api 2 data is ', api2Data);
 
-  // retrieve keys
+  // retrieve the keys from each source. these will be our headers
   var api1Keys = Object.keys(api1Data[0]);
   var api2Keys = Object.keys(api2Data[0]);
-  console.log(Object.keys(api1Data[0]));
-  console.log(Object.keys(api2Data[0]));
-
   var combinedKeys = [...new Set (api2Keys.concat(api1Keys))];
-  console.log("combined keys are ", combinedKeys);
 
-
+  // create the consolidated array of objects
+  var unsortedReturnArray = mergeArrayObjects(api1Data, api2Data, combinedKeys);
+  /*
+  // combine all of the data into one consolidated array of objects.
+  // this array of objects will have duplicate data, so we'll need to
+  // take some steps to remove the duplicates
   let returnArray = [...api1Data, ...api2Data];
   let returnArray2 = [];
 
@@ -115,7 +145,8 @@ async function main() {
           found2 = true;
         }
       }
-      // its happening right, now we need to find a way to keep order
+      // to the arrays where the pairs weren't found, we need to add them
+      // with standard mising data keys/values as "".
       if(!found2){
         console.log('remaining array item: ', returnArray[i]);
         missingKeys = findMissingKeys(returnArray[i], combinedKeys);
@@ -123,15 +154,16 @@ async function main() {
       }
     }
   }
+  */
+
 
   // one more thing before we pass to table, let's alphabetize our keys so they
   // look in uniform order as we grab them into html table
   var sortedKeys = combinedKeys.sort();
-  console.log('sorted keys are ', sortedKeys);
 
   var sortedReturnArray = [];
 
-  returnArray2.forEach(item => {
+  unsortedReturnArray.forEach(item => {
     const ordered = Object.keys(item).sort().reduce(
       (obj, key) => {
         obj[key] = item[key];
@@ -186,7 +218,7 @@ async function main() {
     }
   })*/
   console.log(returnArray);
-  console.log(returnArray2);
+  console.log(unsortedReturnArray);
 }
 main();
 
