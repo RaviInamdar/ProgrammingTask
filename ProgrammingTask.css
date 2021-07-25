@@ -8,3 +8,8 @@ th {
   background-color: #04AA6D;
   color: white;
 }
+#taskTable {
+  float: center;
+  margin: 50px;
+  padding: 50px;
+}

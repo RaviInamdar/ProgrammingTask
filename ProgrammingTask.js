@@ -82,9 +82,15 @@ function mergeArrayObjects(api1Data, api2Data, combinedKeys){
   return returnArray;
 }
 
+/*
+  This function sorts all the keys inside of the objects in the array
+  of objects in alphabetical order. This is done for the purpose of making sure
+  the header values match the cell values when we convert these out to HTML.
+*/
 function sortReturnArray(unsortedReturnArray){
   var sortedReturnArray = [];
   unsortedReturnArray.forEach(item => {
+    // this finds all keys in the object 'item', and sorts them
     const ordered = Object.keys(item).sort().reduce(
       (obj, key) => {
         obj[key] = item[key];
@@ -92,6 +98,7 @@ function sortReturnArray(unsortedReturnArray){
       },
       {}
     );
+    // we put back each item in a sorted return array
     sortedReturnArray.push({...ordered});
   });
   return sortedReturnArray;
@@ -117,6 +124,13 @@ function findMissingKeys(obj, combinedKeys){
   return returnObject;
 }
 
+/*
+  This function simply converts our sorted data into HTML with both the objKeys
+  and our sorted return array. this is a vanilla javascript way of approaching
+  however frameworks like React can have the ability to return a chunk of html
+  and sorted data elements into a component, where it would then be called by a base
+  component and fired there.
+*/
 function insertTableAndData(sortedKeys, sortedReturnArray){
   var htmlTable = document.getElementById('taskTable');
   let table = document.createElement('table');
@@ -164,42 +178,13 @@ async function main() {
   // create the consolidated array of objects
   var unsortedReturnArray = mergeArrayObjects(api1Data, api2Data, combinedKeys);
 
-  // one more thing before we pass to table, let's alphabetize our keys so they
-  // look in uniform order as we grab them into html table
+  // alphabetize our keys so they look in uniform order as we grab them into
+  // html table. for this, we'll need to sort the array of keys and sort each
+  // key in the array of objects.
   var sortedKeys = combinedKeys.sort();
-
   var sortedReturnArray = sortReturnArray(unsortedReturnArray);
 
   // now, add the table items and headers to our html
   insertTableAndData(sortedKeys, sortedReturnArray);
-
-  /*
-  var htmlTable = document.getElementById('taskTable');
-  let table = document.createElement('table');
-  let headerRow = document.createElement('tr');
-
-  sortedKeys.forEach(headerText => {
-    let header = document.createElement('th');
-    let textNode = document.createTextNode(headerText);
-    header.appendChild(textNode);
-    headerRow.appendChild(header);
-  });
-
-  table.appendChild(headerRow);
-
-  sortedReturnArray.forEach(item => {
-    let row = document.createElement('tr');
-
-    Object.values(item).forEach(text => {
-      let cell = document.createElement('td');
-      let textNode = document.createTextNode(text);
-      cell.appendChild(textNode);
-      row.appendChild(cell);
-    })
-    table.appendChild(row);
-  })
-
-  htmlTable.appendChild(table);
-*/
 }
 main();
