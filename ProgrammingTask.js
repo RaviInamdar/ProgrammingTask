@@ -134,7 +134,7 @@ async function main() {
   returnArray2.forEach(item => {
     const ordered = Object.keys(item).sort().reduce(
       (obj, key) => {
-        obj[key] = unordered[key];
+        obj[key] = item[key];
         return obj;
       },
       {}
