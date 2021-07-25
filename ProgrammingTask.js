@@ -148,7 +148,7 @@ async function main() {
   let table = document.createElement('table');
   let headerRow = document.createElement('tr');
 
-  combinedKeys.forEach(headerText => {
+  sortedKeys.forEach(headerText => {
     let header = document.createElement('th');
     let textNode = document.createTextNode(headerText);
     header.appendChild(textNode);
@@ -157,7 +157,7 @@ async function main() {
 
   table.appendChild(headerRow);
 
-  returnArray2.forEach(item => {
+  sortedReturnArray.forEach(item => {
     let row = document.createElement('tr');
 
     Object.values(item).forEach(text => {
