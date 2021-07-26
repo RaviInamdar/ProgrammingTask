@@ -24,7 +24,7 @@
   - *Displaying API data*: Currently, pure javascript functions are called for creating table headers, rows, and cells. This creates some limitations in how we can organize and display the data on the table. For example, extra functions and lines of code were created to (1) add extra objects where objects don't exist and (2) "order" the header/object key data in a way where data displays uniformly across the table. **Using a framework like React, we could have created this API table into a component where we could render the table-specific HTML data separately in a different file. and combine a forEach() loop of the table to pull on the object name directly using dot notation (ex. item.id, item.age, etc)**
 # (however, the one advantage to having the code done this way is that no api-specific key other than ID is referenced during the creation of the table. In the use of React, we would possibly need to create additional functionality to destructure the unknown keys and refer to these keys when doing the forEach() function )
 #
-#
+# - related to displaying API data, an improvement to the current code base could have been made by adding functionality to sort the result data by ID number. 
 #
 #
 #
