@@ -21,7 +21,6 @@ async function retrieveAPI(url){
 	const response = await fetch(url);
   // saves response data as JSON object -> an easy way to use data in JS
   var data = await response.json();
-  console.log('data is', data);
   // we want to return this data as we want to save it outside of this fxn
   return data;
 }
